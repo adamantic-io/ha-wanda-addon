@@ -77,7 +77,7 @@ apps/ztna/packaging/homeassistant/wanda-agent/build-image.sh 1.0.0
 ```
 
 This cross-compiles arm64 + amd64 binaries, builds a multi-arch image, and
-pushes `ghcr.io/adamantic/wanda-agent-ha:1.0.0` + `:latest`.
+pushes `europe-west3-docker.pkg.dev/adm-wanda/wanda-public/wanda-agent-ha:1.0.0` + `:latest`.
 
 ### Local build (no registry)
 

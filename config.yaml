@@ -3,7 +3,7 @@ version: "1.0.0"
 slug: wanda_agent
 description: Wanda ZTNA agent - exposes this Home Assistant as a Wanda machine
 url: https://wanda.adamantic.net
-image: "ghcr.io/adamantic/wanda-agent-ha"
+image: "europe-west3-docker.pkg.dev/adm-wanda/wanda-public/wanda-agent-ha"
 arch:
   - aarch64
   - amd64

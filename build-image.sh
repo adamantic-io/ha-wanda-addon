@@ -1,12 +1,14 @@
 #!/usr/bin/env bash
-# Build and push the Wanda HA add-on multi-arch image to GHCR.
+# Build and push the Wanda HA add-on multi-arch image to Google Artifact Registry.
 # Run from the wanda repo root:
 #   apps/ztna/packaging/homeassistant/wanda-agent/build-image.sh [version]
 #
-# Prerequisites: docker login ghcr.io, docker buildx with multi-arch support.
+# Prerequisites:
+#   gcloud auth configure-docker europe-west3-docker.pkg.dev
+#   docker buildx with multi-arch support
 set -euo pipefail
 
-IMAGE="ghcr.io/adamantic/wanda-agent-ha"
+IMAGE="europe-west3-docker.pkg.dev/adm-wanda/wanda-public/wanda-agent-ha"
 VERSION="${1:-latest}"
 ADDON_DIR="apps/ztna/packaging/homeassistant/wanda-agent"
 ZTNA_DIR="apps/ztna"
