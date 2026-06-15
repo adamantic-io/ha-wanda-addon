@@ -1,0 +1,25 @@
+name: Wanda Agent
+version: "1.0.0"
+slug: wanda_agent
+description: Wanda ZTNA agent - exposes this Home Assistant as a Wanda machine
+url: https://wanda.adamantic.net
+image: "ghcr.io/adamantic/wanda-agent-ha"
+arch:
+  - aarch64
+  - amd64
+init: false
+host_network: true
+startup: application
+boot: auto
+options:
+  bastion_address: "bastion.example.net:8443"
+  machine_id: "REPLACE_WITH_ID_FROM_WANDA_UI"
+  tls_insecure: true
+  ha_target: "http://localhost:8123"
+  ssh_target: "tcp://localhost:22"
+schema:
+  bastion_address: str
+  machine_id: str
+  tls_insecure: bool
+  ha_target: str
+  ssh_target: str?
