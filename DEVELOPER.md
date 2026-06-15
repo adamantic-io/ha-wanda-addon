@@ -33,6 +33,50 @@ Multi-arch: `linux/arm64` (HA Green) + `linux/amd64`.
 | HA web UI | `wanda:status` | `http://` | Shows as HTTP / Forwardable in client |
 | SSH relay | `remote-access` | `tcp://` | Avoids JIT provisioning (fails in container); user SSHs to forwarded port |
 
+## One-click install integration (onboarding wizard)
+
+HA exposes deep links via `my.home-assistant.io` that redirect to the user's local
+HA instance. These are the building blocks for a "click here to install" button in
+the Wanda machine onboarding wizard.
+
+### Step 1 — Add the repository (once per HA instance)
+
+```
+https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Fadamantic-io%2Fha-wanda-addon
+```
+
+Opens a dialog in the user's HA to add this repo to their add-on store.
+
+### Step 2 — Open the add-on install page
+
+```
+https://my.home-assistant.io/redirect/supervisor_addon/?addon=wanda_agent&repository_url=https%3A%2F%2Fgithub.com%2Fadamantic-io%2Fha-wanda-addon
+```
+
+Opens the Wanda Agent install page directly. If the repo is not yet added, HA adds
+it automatically before opening the page. After install, the user configures
+`machine_id` and `bastion_address` in the Configuration tab.
+
+### Onboarding wizard flow (planned)
+
+```
+Wanda UI: create machine → copy machine_id
+  → "Install agent on Home Assistant" button
+  → Step 2 link (auto-adds repo + opens install page)
+  → user sets machine_id = <pre-filled from wizard> in HA Configuration tab
+  → Start
+```
+
+Pre-filling `machine_id` is not yet possible via deep link (HA doesn't support
+option pre-fill in the redirect). The user must copy-paste it from the wizard.
+
+### Prerequisite
+
+The user's HA Supervisor must be up-to-date. Outdated Supervisor versions block
+`add_repository` with: `'StoreManager.add_repository' blocked from execution,
+supervisor needs to be updated first`. This is an HA maintenance issue, not a
+Wanda bug — HA shows an update banner when the Supervisor is behind.
+
 ## Local build (no registry)
 
 1. Build the arm64 binary from the wanda repo:
